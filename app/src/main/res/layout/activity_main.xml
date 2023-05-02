@@ -13,7 +13,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/gradient_background">
 
         <TableLayout
             android:layout_width="match_parent"
@@ -21,33 +22,43 @@
 
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="48dp">
 
                 <EditText
                     android:id="@+id/editTextTextPersonName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:text="Name"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:inputType="textCapCharacters"
+                    android:text="@string/City"
                     android:textColor="@color/white"
-                    android:backgroundTint="@color/white" />
+                    android:textSize="24sp"
+                    android:backgroundTint="@color/white"
+                    android:layout_weight="3"/>
 
                 <ImageButton
-                    android:id="@+id/imageButton"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:background="@color/transparent"
-                    app:tint="@color/white"
-                    app:srcCompat="?android:attr/actionModeWebSearchDrawable" />
+                    android:id="@+id/imageButton3"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    app:srcCompat="@drawable/outline_search_48"
+                    android:layout_weight="1"/>
 
                 <ImageButton
-                    android:id="@+id/imageButton2"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:background="@color/transparent"
-                    app:tint="@color/white"
-                    app:srcCompat="@android:drawable/btn_star" />
+                    android:id="@+id/imageButton4"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    app:srcCompat="@drawable/outline_favorite_border_48"
+                    android:layout_weight="1"/>
+
+                <ImageButton
+                    android:id="@+id/imageButton5"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    app:srcCompat="@drawable/outline_menu_48"
+                    android:layout_weight="1"/>
+
             </TableRow>
 
         </TableLayout>
