@@ -17,39 +17,22 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 public class PageAdapter extends FragmentStateAdapter {
 
-    private FragmentActivity mainActivity;
+    private final FragmentActivity mainActivity;
     public PageAdapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
         this.mainActivity = fragmentActivity;
     }
 
-    @SuppressLint("ResourceAsColor")
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        EditText editText = mainActivity.findViewById(R.id.editTextTextPersonName);
-        ImageButton imageSearch = mainActivity.findViewById(R.id.imageButtonSearch);
-        ImageButton imageFav = mainActivity.findViewById(R.id.imageButtonFav);
-        ImageButton imageMenu = mainActivity.findViewById(R.id.imageButtonMenu);
         switch(position){
             case 0:
-                editText.setBackgroundColor(0x20FFFFFF);
-                imageSearch.setBackgroundColor(0x20FFFFFF);
-                imageFav.setBackgroundColor(0x00FFFFFF);
-                imageMenu.setBackgroundColor(0x00FFFFFF);
-                return new FragmentWeather();
+                return new FragmentWeather(this.mainActivity);
             case 1:
-                editText.setBackgroundColor(0x00FFFFFF);
-                imageSearch.setBackgroundColor(0x00FFFFFF);
-                imageFav.setBackgroundColor(0x20FFFFFF);
-                imageMenu.setBackgroundColor(0x00FFFFFF);
-                return new FragmentFavourite();
+                return new FragmentFavourite(this.mainActivity);
             case 2:
-                editText.setBackgroundColor(0x00FFFFFF);
-                imageSearch.setBackgroundColor(0x00FFFFFF);
-                imageFav.setBackgroundColor(0x00FFFFFF);
-                imageMenu.setBackgroundColor(0x20FFFFFF);
-                return new FragmentSettings();
+                return new FragmentSettings(this.mainActivity);
             default:
                 throw new Resources.NotFoundException("Position not found");
         }
