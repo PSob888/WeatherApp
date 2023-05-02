@@ -4,17 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    android:background="@drawable/gradient_background"
     tools:context=".MainActivity">
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/gradient_background">
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <TableLayout
             android:layout_width="match_parent"
@@ -64,234 +62,20 @@
                     android:contentDescription="Menu" />
 
             </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="64dp"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
-                    tools:ignore="UselessParent">
-
-                    <TextView
-                        android:id="@+id/textCityName"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_margin="10dp"
-                        android:layout_weight="2"
-                        android:textColor="@color/white"
-                        android:textSize="28sp"
-                        android:gravity="center"
-                        android:text="@string/City" />
-
-                    <ImageButton
-                        android:id="@+id/imageButtonAddToFav"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:background="@color/transparent"
-                        app:srcCompat="@drawable/outline_favorite_border_48"
-                        app:tint="@color/additional1"
-                        android:layout_weight="1"
-                        android:contentDescription="AddToFav" />
-
-                </LinearLayout>
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="128dp"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/texttile"
-                    android:orientation="horizontal"
-                    tools:ignore="UselessParent">
-
-                    <TextView
-                        android:id="@+id/textTemperature"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_margin="10dp"
-                        android:layout_weight="1"
-                        android:textColor="@color/white"
-                        android:textSize="28sp"
-                        android:gravity="center"
-                        android:text="@string/Temperature" />
-
-                    <TextView
-                        android:id="@+id/textTemperature2"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_margin="10dp"
-                        android:layout_weight="1"
-                        android:textColor="@color/additional1"
-                        android:textSize="28sp"
-                        android:gravity="center"
-                        android:text="@string/Temperature" />
-                </LinearLayout>
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="128dp"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/texttile"
-                    android:orientation="horizontal"
-                    tools:ignore="UselessParent">
-
-                    <TextView
-                        android:id="@+id/textClouds"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_margin="10dp"
-                        android:layout_weight="1"
-                        android:textColor="@color/white"
-                        android:textSize="28sp"
-                        android:gravity="center"
-                        android:text="@string/Clouds" />
-
-                    <TextView
-                        android:id="@+id/textClouds2"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_margin="10dp"
-                        android:layout_weight="1"
-                        android:textColor="@color/additional1"
-                        android:textSize="28sp"
-                        android:gravity="center"
-                        android:text="@string/Clouds" />
-                </LinearLayout>
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="128dp"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/texttile"
-                    android:orientation="horizontal"
-                    tools:ignore="UselessParent">
-
-                    <TextView
-                        android:id="@+id/textMoist"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_margin="10dp"
-                        android:layout_weight="1"
-                        android:textColor="@color/white"
-                        android:textSize="28sp"
-                        android:gravity="center"
-                        android:text="@string/Moist" />
-
-                    <TextView
-                        android:id="@+id/textMoist2"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_margin="10dp"
-                        android:layout_weight="1"
-                        android:textColor="@color/additional1"
-                        android:textSize="28sp"
-                        android:gravity="center"
-                        android:text="@string/Moist" />
-                </LinearLayout>
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="128dp"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/texttile"
-                    android:orientation="horizontal"
-                    tools:ignore="UselessParent">
-
-                    <TextView
-                        android:id="@+id/textWind"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_margin="10dp"
-                        android:layout_weight="1"
-                        android:textColor="@color/white"
-                        android:textSize="28sp"
-                        android:gravity="center"
-                        android:text="@string/Wind" />
-
-                    <TextView
-                        android:id="@+id/textWind2"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_margin="10dp"
-                        android:layout_weight="1"
-                        android:textColor="@color/additional1"
-                        android:textSize="28sp"
-                        android:gravity="center"
-                        android:text="@string/Wind" />
-                </LinearLayout>
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="128dp"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/texttile"
-                    android:orientation="horizontal"
-                    tools:ignore="UselessParent">
-
-                    <TextView
-                        android:id="@+id/textPressure"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_margin="10dp"
-                        android:layout_weight="1"
-                        android:textColor="@color/white"
-                        android:textSize="28sp"
-                        android:gravity="center"
-                        android:text="@string/Pressure" />
-
-                    <TextView
-                        android:id="@+id/textPressure2"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_margin="10dp"
-                        android:layout_weight="1"
-                        android:textColor="@color/additional1"
-                        android:textSize="28sp"
-                        android:gravity="center"
-                        android:text="@string/Pressure" />
-                </LinearLayout>
-
-            </TableRow>
-
         </TableLayout>
-    </ScrollView>
+
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/fragmentContainerView4"
+                android:name="com.example.weatherapp2.FragmentWeather"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </ScrollView>
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
