@@ -16,4 +16,7 @@
     <color name="additional2">#EF6024</color>
     <color name="tilecolor1">#3C4557</color>
     <color name="tilecolor2">#2A3347</color>
+    <color name="clouds">#A8AAAE</color>
+    <color name="sun">#EDCE72</color>
+    <color name="moon">#2A303E</color>
 </resources>

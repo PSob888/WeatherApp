@@ -17,7 +17,7 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="64dp"
+                android:layout_height="86dp"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
                 android:orientation="horizontal"
@@ -30,7 +30,7 @@
                     android:layout_margin="10dp"
                     android:layout_weight="2"
                     android:textColor="@color/white"
-                    android:textSize="28sp"
+                    android:textSize="48sp"
                     android:gravity="center"
                     android:text="@string/City" />
 
@@ -39,10 +39,65 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:background="@color/transparent"
-                    app:srcCompat="@drawable/outline_favorite_border_48"
+                    app:srcCompat="@drawable/outline_favorite_border_36"
                     app:tint="@color/additional1"
                     android:layout_weight="1"
                     android:contentDescription="AddToFav" />
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:id="@+id/textHour"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:layout_weight="2"
+                android:textColor="@color/white"
+                android:textSize="48sp"
+                android:gravity="center"
+                android:text="@string/Hour" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                tools:ignore="UselessParent">
+
+                <TextView
+                    android:id="@+id/textLastUpdated"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:text="@string/LastUpdated" />
+
+                <TextView
+                    android:id="@+id/textLastUpdated2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/transparent"
+                    app:srcCompat="@drawable/outline_favorite_border_36"
+                    app:tint="@color/additional1"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/LastUpdated" />
 
             </LinearLayout>
 
@@ -120,6 +175,16 @@
                     android:textSize="28sp"
                     android:gravity="center"
                     android:text="@string/Clouds" />
+
+                <ImageButton
+                    android:id="@+id/imageTypeOfClouds"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/transparent"
+                    app:srcCompat="@drawable/cloud_solid_48"
+                    app:tint="@color/clouds"
+                    android:layout_weight="1"
+                    android:contentDescription="TypeOfClouds" />
             </LinearLayout>
 
         </TableRow>
