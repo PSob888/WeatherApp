@@ -32,7 +32,7 @@
                     android:textColor="@color/white"
                     android:textSize="48sp"
                     android:gravity="center"
-                    android:text="@string/City" />
+                    android:text="@string/Value" />
 
                 <ImageButton
                     android:id="@+id/imageButtonAddToFav"
@@ -61,7 +61,7 @@
                 android:textColor="@color/white"
                 android:textSize="48sp"
                 android:gravity="center"
-                android:text="@string/Hour" />
+                android:text="@string/Value" />
 
         </TableRow>
 
@@ -89,15 +89,14 @@
                     android:text="@string/LastUpdated" />
 
                 <TextView
-                    android:id="@+id/textLastUpdated2"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:background="@color/transparent"
-                    app:srcCompat="@drawable/outline_favorite_border_36"
-                    app:tint="@color/additional1"
+                    android:layout_margin="10dp"
                     android:layout_weight="1"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
                     android:gravity="center"
-                    android:text="@string/LastUpdated" />
+                    android:text="@string/Value" />
 
             </LinearLayout>
 
@@ -136,7 +135,8 @@
                     android:textColor="@color/additional1"
                     android:textSize="28sp"
                     android:gravity="center"
-                    android:text="@string/Temperature" />
+                    android:text="@string/Value" />
+
             </LinearLayout>
 
         </TableRow>
@@ -174,7 +174,7 @@
                     android:textColor="@color/additional1"
                     android:textSize="28sp"
                     android:gravity="center"
-                    android:text="@string/Clouds" />
+                    android:text="@string/Value" />
 
                 <ImageButton
                     android:id="@+id/imageTypeOfClouds"
@@ -222,7 +222,7 @@
                     android:textColor="@color/additional1"
                     android:textSize="28sp"
                     android:gravity="center"
-                    android:text="@string/Moist" />
+                    android:text="@string/Value" />
             </LinearLayout>
 
         </TableRow>
@@ -260,7 +260,7 @@
                     android:textColor="@color/additional1"
                     android:textSize="28sp"
                     android:gravity="center"
-                    android:text="@string/Wind" />
+                    android:text="@string/Value" />
             </LinearLayout>
 
         </TableRow>
@@ -298,7 +298,7 @@
                     android:textColor="@color/additional1"
                     android:textSize="28sp"
                     android:gravity="center"
-                    android:text="@string/Pressure" />
+                    android:text="@string/Value" />
             </LinearLayout>
 
         </TableRow>

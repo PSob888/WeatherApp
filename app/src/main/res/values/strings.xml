@@ -8,5 +8,6 @@
     <string name="Moist">Moist</string>
     <string name="Wind">Wind</string>
     <string name="Pressure">Pressure</string>
+    <string name="Value">[Value]</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
