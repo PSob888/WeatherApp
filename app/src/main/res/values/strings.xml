@@ -2,6 +2,10 @@
     <string name="app_name">WeatherApp2</string>
     <string name="City">CITY</string>
     <string name="Hour">Hour</string>
+    <string name="Settings">Settings</string>
+    <string name="Units">Units</string>
+    <string name="Metric">Metric</string>
+    <string name="Imperial">Imperial</string>
     <string name="LastUpdated">LastUpdated</string>
     <string name="Temperature">Temperature</string>
     <string name="Clouds">Clouds</string>
