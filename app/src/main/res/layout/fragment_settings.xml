@@ -48,15 +48,38 @@
                 android:orientation="vertical">
 
 
-                <Spinner
-                    android:id="@+id/spinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
+                <Switch
+                    android:id="@+id/switch1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"/>
             </LinearLayout>
 
 
         </LinearLayout>
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+        <TextView
+            android:id="@+id/textRefresh"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:text="@string/Refresh" />
+
+        <Spinner
+            android:id="@+id/spinnerTime"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+
 
     </TableRow>
 </LinearLayout>
