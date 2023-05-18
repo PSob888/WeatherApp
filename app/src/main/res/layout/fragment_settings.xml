@@ -29,7 +29,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            tools:ignore="UselessParent">
 
             <TextView
                 android:id="@+id/textUnits"
@@ -52,7 +53,8 @@
                     android:id="@+id/switch1"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center"
+                    tools:ignore="UseSwitchCompatOrMaterialXml" />
             </LinearLayout>
 
 
