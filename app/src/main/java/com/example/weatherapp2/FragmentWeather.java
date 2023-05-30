@@ -20,10 +20,6 @@ public class FragmentWeather extends Fragment {
         // Required empty public constructor
     }
 
-    public FragmentWeather(@NonNull FragmentActivity fragmentActivity) {
-        this.mainActivity = fragmentActivity;
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -33,6 +29,8 @@ public class FragmentWeather extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        mainActivity = (MainActivity) getActivity();
     }
 
     @Override

@@ -28,11 +28,11 @@ public class PageAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch(position){
             case 0:
-                return new FragmentWeather(this.mainActivity);
+                return new FragmentWeather();
             case 1:
-                return new FragmentFavourite(this.mainActivity);
+                return new FragmentFavourite();
             case 2:
-                return new FragmentSettings(this.mainActivity);
+                return new FragmentSettings();
             default:
                 throw new Resources.NotFoundException("Position not found");
         }

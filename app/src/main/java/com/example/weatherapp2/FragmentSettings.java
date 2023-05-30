@@ -26,10 +26,6 @@ public class FragmentSettings extends Fragment {
         // Required empty public constructor
     }
 
-    public FragmentSettings(@NonNull FragmentActivity fragmentActivity) {
-        this.mainActivity = fragmentActivity;
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -38,6 +34,8 @@ public class FragmentSettings extends Fragment {
 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        mainActivity = (MainActivity) getActivity();
 
         Spinner spinnerTime =view.findViewById(R.id.spinnerTime);
 
