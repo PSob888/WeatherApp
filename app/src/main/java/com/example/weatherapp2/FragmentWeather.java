@@ -5,6 +5,7 @@ import static android.content.Context.MODE_PRIVATE;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
@@ -43,6 +44,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -95,11 +97,33 @@ public class FragmentWeather extends Fragment {
         editText = view.findViewById(R.id.editText);
         searchButton = view.findViewById(R.id.imageButtonSerach);
         cloudImage = view.findViewById(R.id.imageTypeOfClouds);
+        favButton = view.findViewById(R.id.imageButtonAddToFav);
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String cityName = String.valueOf(editText.getText());
-                getWeather(view, cityName);
+                if(!cityName.equals(""))
+                    getWeather(view, cityName);
+            }
+        });
+
+        favButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String cityName = (String) textCityName.getText();
+                List<String> fav = mainActivity.getFavourites();
+                if(fav.contains(cityName)){
+                    fav.remove(cityName);
+                }
+                else{
+                    fav.add(cityName);
+                }
+                mainActivity.setFavourites(fav);
+                mainActivity.saveFavourites();
+
+
+
+                setAllTheTexts("current");
             }
         });
         setAllTheTexts("current");
@@ -134,15 +158,20 @@ public class FragmentWeather extends Fragment {
                 else if(!(response.isSuccessful())){
                     Toast.makeText(getActivity() , response.code(), Toast.LENGTH_LONG).show();
                 }
-                WeatherResponse myData = response.body();
-                Log.d("JebaneGowno", myData.getName());
+                else{
+                    WeatherResponse myData = response.body();
 
-                WeatherPanel test = new WeatherPanel(new WeatherResponse(myData), Calendar.getInstance().getTime());
-                Log.d("JebaneGowno", test.getWeatherResponse().getName());
+                    WeatherPanel test = new WeatherPanel(new WeatherResponse(myData), Calendar.getInstance().getTime());
 
-                setWeatherPanel(test);
-                writeWeatherDataToFile("current");
-                setAllTheTexts("current");
+                    if(test.getWeatherResponse().getCoord() == null){
+                        Toast.makeText(getActivity() , "No data, probably not a valid city", Toast.LENGTH_LONG).show();
+                    }
+                    else{
+                        setWeatherPanel(test);
+                        writeWeatherDataToFile("current");
+                        setAllTheTexts("current");
+                    }
+                }
             }
 
             @Override
@@ -157,19 +186,9 @@ public class FragmentWeather extends Fragment {
         SharedPreferences mPrefs = mainActivity.getPreferences(MODE_PRIVATE);
         Gson gson = new Gson();
         String json = gson.toJson(weatherPanel, WeatherPanel.class);
-        Log.d("JsonWrite", weatherPanel.getWeatherResponse().getName());
-        Log.d("JsonWrite", json);
         SharedPreferences.Editor prefsEditor = mPrefs.edit();
         prefsEditor.putString(filename, json);
         prefsEditor.commit();
-//        try{
-//            ObjectOutputStream outputStream = new ObjectOutputStream(Files.newOutputStream(Paths.get(filename)));
-//            outputStream.writeObject(weatherPanel);
-//            outputStream.flush();
-//            outputStream.close();
-//        } catch (IOException e) {
-//            Toast.makeText(getActivity() , "Can't create the file", Toast.LENGTH_LONG).show();
-//        }
     }
 
     private void setAllTheTexts(String filename){
@@ -178,9 +197,17 @@ public class FragmentWeather extends Fragment {
         String json = mPrefs.getString(filename, "");
         WeatherPanel weatherPanel = gson.fromJson(json, WeatherPanel.class);
 
+        String name = weatherPanel.getWeatherResponse().getName();
+        if(mainActivity.getFavourites().contains(name)){
+            favButton.setImageResource(R.drawable.outline_favorite_36);
+        }
+        else{
+            favButton.setImageResource(R.drawable.outline_favorite_border_36);
+        }
+
         current = weatherPanel.getWeatherResponse();
 
-        textCityName.setText(weatherPanel.getWeatherResponse().getName());
+        textCityName.setText(name);
 
         Date time=new Date((current.getDt()*1000) + (weatherPanel.getWeatherResponse().getTimezone()*1000));
         SimpleDateFormat formatter = new SimpleDateFormat("HH:mm dd.MM.yyyy");
@@ -198,13 +225,6 @@ public class FragmentWeather extends Fragment {
         String image_url="https://openweathermap.org/img/w/" + weatherPanel.getWeatherResponse().getWeatherList().get(0).getIcon() + ".png";
         Picasso.get().load(image_url).into(cloudImage);
 
-//        try{
-//            ObjectInputStream inputStream = new ObjectInputStream(Files.newInputStream(Paths.get(filename)));
-//            WeatherPanel weatherPanel = (WeatherPanel)inputStream.readObject();
-//            inputStream.close();
-//        } catch (IOException | ClassNotFoundException e) {
-//            Toast.makeText(getActivity() , "Can't find the file", Toast.LENGTH_LONG).show();
-//        }
     }
 
     private static double round (double value, int precision) {
