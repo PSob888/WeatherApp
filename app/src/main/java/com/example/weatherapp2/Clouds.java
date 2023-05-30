@@ -11,6 +11,10 @@ public class Clouds {
     @SerializedName("all")
     private int all;
 
+    public Clouds(int all) {
+        this.all = all;
+    }
+
     public Integer getAll() {
         return all;
     }

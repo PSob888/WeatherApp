@@ -44,6 +44,38 @@ public class WeatherResponse {
     @SerializedName("cod")
     private int cod;
 
+    public WeatherResponse(Coord coord, List<Weather> weatherList, String base, Main main, int visibility, Wind wind, Clouds clouds, long dt, Sys sys, int timezone, int id, String name, int cod) {
+        this.coord = coord;
+        this.weatherList = weatherList;
+        this.base = base;
+        this.main = main;
+        this.visibility = visibility;
+        this.wind = wind;
+        this.clouds = clouds;
+        this.dt = dt;
+        this.sys = sys;
+        this.timezone = timezone;
+        this.id = id;
+        this.name = name;
+        this.cod = cod;
+    }
+
+    public WeatherResponse(WeatherResponse weatherResponse) {
+        this.coord = weatherResponse.getCoord();
+        this.weatherList = weatherResponse.getWeatherList();
+        this.base = weatherResponse.getBase();
+        this.main = weatherResponse.getMain();
+        this.visibility = weatherResponse.getVisibility();
+        this.wind = weatherResponse.getWind();
+        this.clouds = weatherResponse.getClouds();
+        this.dt = weatherResponse.getDt();
+        this.sys = weatherResponse.getSys();
+        this.timezone = weatherResponse.getTimezone();
+        this.id = weatherResponse.getId();
+        this.name = weatherResponse.getName();
+        this.cod = weatherResponse.getCod();
+    }
+
     public Coord getCoord() {
         return coord;
     }

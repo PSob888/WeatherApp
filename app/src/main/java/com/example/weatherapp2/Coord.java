@@ -13,6 +13,11 @@ public class Coord {
     @SerializedName("lat")
     private double lat;
 
+    public Coord(double lon, double lat) {
+        this.lon = lon;
+        this.lat = lat;
+    }
+
     public Double getLon() {
         return lon;
     }

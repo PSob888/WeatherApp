@@ -1,22 +1,27 @@
 package com.example.weatherapp2;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class WeatherPanel {
-    WeatherResponse weather;
+    @SerializedName("weatherResponse")
+    WeatherResponse weatherResponse;
+    @SerializedName("updateDate")
     Date updateDate;
 
     public WeatherPanel(WeatherResponse weather, Date updateDate) {
-        this.weather = weather;
+        this.weatherResponse = weather;
         this.updateDate = updateDate;
     }
 
-    public WeatherResponse getWeather() {
-        return weather;
+    public WeatherResponse getWeatherResponse() {
+        return weatherResponse;
     }
 
-    public void setWeather(WeatherResponse weather) {
-        this.weather = weather;
+    public void setWeatherResponse(WeatherResponse weather) {
+        this.weatherResponse = weather;
     }
 
     public Date getUpdateDate() {

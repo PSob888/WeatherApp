@@ -23,6 +23,14 @@ public class Sys {
     @SerializedName("sunset")
     private long sunset;
 
+    public Sys(int type, int id, String country, long sunrise, long sunset) {
+        this.type = type;
+        this.id = id;
+        this.country = country;
+        this.sunrise = sunrise;
+        this.sunset = sunset;
+    }
+
     public Integer getType() {
         return type;
     }

@@ -15,6 +15,13 @@ public class Weather {
     @SerializedName("icon")
     private String icon;
 
+    public Weather(int id, String main, String description, String icon) {
+        this.id = id;
+        this.main = main;
+        this.description = description;
+        this.icon = icon;
+    }
+
     public Integer getId() {
         return id;
     }

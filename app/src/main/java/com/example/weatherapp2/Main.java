@@ -31,6 +31,17 @@ public class Main {
     @SerializedName("grnd_level")
     private int groundLevel;
 
+    public Main(double temp, double feelsLike, double tempMin, double tempMax, int pressure, int humidity, int seaLevel, int groundLevel) {
+        this.temp = temp;
+        this.feelsLike = feelsLike;
+        this.tempMin = tempMin;
+        this.tempMax = tempMax;
+        this.pressure = pressure;
+        this.humidity = humidity;
+        this.seaLevel = seaLevel;
+        this.groundLevel = groundLevel;
+    }
+
     public Double getTemp() {
         return temp;
     }

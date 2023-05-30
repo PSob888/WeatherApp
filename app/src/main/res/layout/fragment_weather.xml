@@ -50,6 +50,42 @@
 
         </TableRow>
 
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                tools:ignore="UselessParent">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:text="@string/LastUpdated" />
+
+                <TextView
+                    android:id="@+id/textLastUpdated"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:text="@string/Value" />
+
+            </LinearLayout>
+
+        </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
@@ -102,43 +138,6 @@
                 android:textSize="48sp"
                 android:gravity="center"
                 android:text="@string/Value" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                tools:ignore="UselessParent">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    android:textColor="@color/white"
-                    android:textSize="14sp"
-                    android:gravity="center"
-                    android:text="@string/LastUpdated" />
-
-                <TextView
-                    android:id="@+id/textLastUpdated"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    android:textColor="@color/white"
-                    android:textSize="14sp"
-                    android:gravity="center"
-                    android:text="@string/Value" />
-
-            </LinearLayout>
 
         </TableRow>
 
