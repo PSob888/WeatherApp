@@ -9,20 +9,19 @@ import com.google.gson.annotations.SerializedName;
 public class Sys {
 
     @SerializedName("type")
-    @Expose
-    private Integer type;
+    private int type;
+
     @SerializedName("id")
-    @Expose
-    private Integer id;
+    private int id;
+
     @SerializedName("country")
-    @Expose
     private String country;
+
     @SerializedName("sunrise")
-    @Expose
-    private Integer sunrise;
+    private long sunrise;
+
     @SerializedName("sunset")
-    @Expose
-    private Integer sunset;
+    private long sunset;
 
     public Integer getType() {
         return type;
@@ -48,7 +47,7 @@ public class Sys {
         this.country = country;
     }
 
-    public Integer getSunrise() {
+    public long getSunrise() {
         return sunrise;
     }
 
@@ -56,7 +55,7 @@ public class Sys {
         this.sunrise = sunrise;
     }
 
-    public Integer getSunset() {
+    public long getSunset() {
         return sunset;
     }
 

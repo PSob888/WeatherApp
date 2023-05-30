@@ -7,13 +7,11 @@ import com.google.gson.annotations.SerializedName;
 
 @Generated("jsonschema2pojo")
 public class Coord {
-
     @SerializedName("lon")
-    @Expose
-    private Double lon;
+    private double lon;
+
     @SerializedName("lat")
-    @Expose
-    private Double lat;
+    private double lat;
 
     public Double getLon() {
         return lon;

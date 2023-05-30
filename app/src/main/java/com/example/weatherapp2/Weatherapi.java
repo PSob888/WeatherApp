@@ -6,6 +6,6 @@ import retrofit2.http.Query;
 
 public interface Weatherapi {
     @GET("weather")
-    Call<Test> getWeather(@Query("q") String cityName,
+    Call<WeatherResponse> getWeather(@Query("q") String cityName,
                           @Query("appid") String api_key);
 }

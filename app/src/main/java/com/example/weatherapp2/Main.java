@@ -7,25 +7,29 @@ import com.google.gson.annotations.SerializedName;
 
 @Generated("jsonschema2pojo")
 public class Main {
-
     @SerializedName("temp")
-    @Expose
-    private Double temp;
+    private double temp;
+
     @SerializedName("feels_like")
-    @Expose
-    private Double feelsLike;
+    private double feelsLike;
+
     @SerializedName("temp_min")
-    @Expose
-    private Double tempMin;
+    private double tempMin;
+
     @SerializedName("temp_max")
-    @Expose
-    private Double tempMax;
+    private double tempMax;
+
     @SerializedName("pressure")
-    @Expose
-    private Integer pressure;
+    private int pressure;
+
     @SerializedName("humidity")
-    @Expose
-    private Integer humidity;
+    private int humidity;
+
+    @SerializedName("sea_level")
+    private int seaLevel;
+
+    @SerializedName("grnd_level")
+    private int groundLevel;
 
     public Double getTemp() {
         return temp;
@@ -65,6 +69,22 @@ public class Main {
 
     public void setPressure(Integer pressure) {
         this.pressure = pressure;
+    }
+
+    public Integer getGrnd_level() {
+        return humidity;
+    }
+
+    public void setGrnd_level(Integer humidity) {
+        this.groundLevel = humidity;
+    }
+
+    public Integer getSea_level() {
+        return humidity;
+    }
+
+    public void setSea_level(Integer humidity) {
+        this.seaLevel = humidity;
     }
 
     public Integer getHumidity() {
