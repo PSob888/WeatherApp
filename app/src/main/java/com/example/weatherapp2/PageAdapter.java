@@ -17,10 +17,8 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 public class PageAdapter extends FragmentStateAdapter {
 
-    private final FragmentActivity mainActivity;
     public PageAdapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
-        this.mainActivity = fragmentActivity;
     }
 
     @NonNull
