@@ -23,19 +23,6 @@
                 android:layout_height="48dp"
                 tools:ignore="UselessParent">
 
-
-                <EditText
-                    android:id="@+id/editTextTextPersonName"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="3"
-                    android:backgroundTint="@color/white"
-                    android:inputType="textCapCharacters"
-                    android:text="@string/City"
-                    android:textColor="@color/white"
-                    android:textSize="24sp"
-                    android:onClick="onClickSearch"/>
-
                 <ImageButton
                     android:id="@+id/imageButtonSearch"
                     android:layout_width="0dp"

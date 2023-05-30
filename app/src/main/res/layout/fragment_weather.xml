@@ -23,6 +23,45 @@
                 android:orientation="horizontal"
                 tools:ignore="UselessParent">
 
+                <EditText
+                    android:id="@+id/editText"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:layout_weight="2"
+                    android:textColor="@color/white"
+                    android:background="none"
+                    android:textSize="48sp"
+                    android:gravity="center"
+                    android:hint="@string/City_here"/>
+
+                <ImageButton
+                    android:id="@+id/imageButtonSerach"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/transparent"
+                    app:srcCompat="@drawable/outline_search_48"
+                    app:tint="@color/white"
+                    android:layout_weight="1"
+                    android:contentDescription="AddToFav" />
+
+            </LinearLayout>
+
+        </TableRow>
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="86dp"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                tools:ignore="UselessParent">
+
                 <TextView
                     android:id="@+id/textCityName"
                     android:layout_width="0dp"

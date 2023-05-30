@@ -44,11 +44,9 @@ public class FragmentSettings extends Fragment {
 
     @Override
     public void onResume(){
-        EditText editText = mainActivity.findViewById(R.id.editTextTextPersonName);
         ImageButton imageSearch = mainActivity.findViewById(R.id.imageButtonSearch);
         ImageButton imageFav = mainActivity.findViewById(R.id.imageButtonFav);
         ImageButton imageMenu = mainActivity.findViewById(R.id.imageButtonMenu);
-        editText.setBackgroundColor(0x00FFFFFF);
         imageSearch.setBackgroundColor(0x00FFFFFF);
         imageFav.setBackgroundColor(0x00FFFFFF);
         imageMenu.setBackgroundColor(0x20FFFFFF);
