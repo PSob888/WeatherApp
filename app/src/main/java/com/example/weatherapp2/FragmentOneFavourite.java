@@ -2,11 +2,17 @@ package com.example.weatherapp2;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,6 +20,10 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class FragmentOneFavourite extends Fragment {
+
+    private MainActivity mainActivity;
+    TextView textCity;
+    TextView textTemp;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -60,5 +70,25 @@ public class FragmentOneFavourite extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_one_favourite, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mainActivity = (MainActivity) getActivity();
+        textCity = view.findViewById(R.id.textCityNameOneFav);
+        textTemp = view.findViewById(R.id.textTemperatureOneFav);
+
+        updateValues();
+    }
+
+    public void onResume(){
+        super.onResume();
+        updateValues();
+    }
+
+    public void updateValues(){
+        textCity.setText(mParam1);
+        textTemp.setText(mParam2);
     }
 }
