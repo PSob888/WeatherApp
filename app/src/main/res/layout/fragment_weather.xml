@@ -340,6 +340,196 @@
 
         </TableRow>
 
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="64dp"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/texttile"
+                android:orientation="horizontal"
+                tools:ignore="UselessParent">
+
+                <TextView
+                    android:id="@+id/textTomorrow"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:textColor="@color/white"
+                    android:textSize="28sp"
+                    android:gravity="center"
+                    android:text="@string/Tomorrow" />
+
+                <TextView
+                    android:id="@+id/textTomorrow2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:textColor="@color/additional1"
+                    android:textSize="28sp"
+                    android:gravity="center"
+                    android:text="@string/Value" />
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="64dp"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/texttile"
+                android:orientation="horizontal"
+                tools:ignore="UselessParent">
+
+                <TextView
+                    android:id="@+id/textInTwo"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:textColor="@color/white"
+                    android:textSize="28sp"
+                    android:gravity="center"
+                    android:text="@string/InTwoDays" />
+
+                <TextView
+                    android:id="@+id/textInTwo2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:textColor="@color/additional1"
+                    android:textSize="28sp"
+                    android:gravity="center"
+                    android:text="@string/Value" />
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="64dp"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/texttile"
+                android:orientation="horizontal"
+                tools:ignore="UselessParent">
+
+                <TextView
+                    android:id="@+id/textInThree"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:textColor="@color/white"
+                    android:textSize="28sp"
+                    android:gravity="center"
+                    android:text="@string/InThreeDays" />
+
+                <TextView
+                    android:id="@+id/textInThree2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:textColor="@color/additional1"
+                    android:textSize="28sp"
+                    android:gravity="center"
+                    android:text="@string/Value" />
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="64dp"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/texttile"
+                android:orientation="horizontal"
+                tools:ignore="UselessParent">
+
+                <TextView
+                    android:id="@+id/textInFour"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:textColor="@color/white"
+                    android:textSize="28sp"
+                    android:gravity="center"
+                    android:text="@string/InFourDays" />
+
+                <TextView
+                    android:id="@+id/textInFour2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:textColor="@color/additional1"
+                    android:textSize="28sp"
+                    android:gravity="center"
+                    android:text="@string/Value" />
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="64dp"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/texttile"
+                android:orientation="horizontal"
+                tools:ignore="UselessParent">
+
+                <TextView
+                    android:id="@+id/textInFive"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:textColor="@color/white"
+                    android:textSize="28sp"
+                    android:gravity="center"
+                    android:text="@string/InFiveDays" />
+
+                <TextView
+                    android:id="@+id/textInFive2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:textColor="@color/additional1"
+                    android:textSize="28sp"
+                    android:gravity="center"
+                    android:text="@string/Value" />
+            </LinearLayout>
+
+        </TableRow>
+
     </LinearLayout>
 
 </FrameLayout>

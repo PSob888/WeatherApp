@@ -76,12 +76,61 @@
             android:textColor="@color/white"
             android:text="@string/Refresh" />
 
-        <Spinner
-            android:id="@+id/spinnerTime"
-            android:layout_width="0dp"
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <Switch
+            android:id="@+id/switchMinutes5"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_marginLeft="100dp"
+            android:layout_marginRight="100dp"
+            android:text="@string/Min5"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+    </TableRow>
 
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
 
+        <Switch
+            android:id="@+id/switchMinutes10"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="100dp"
+            android:layout_marginRight="100dp"
+            android:text="@string/Min10"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <Switch
+            android:id="@+id/switchMinutes20"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="100dp"
+            android:layout_marginRight="100dp"
+            android:text="@string/Min20"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <Switch
+            android:id="@+id/switchMinutes30"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="100dp"
+            android:layout_marginRight="100dp"
+            android:text="@string/Min30"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
     </TableRow>
 </LinearLayout>

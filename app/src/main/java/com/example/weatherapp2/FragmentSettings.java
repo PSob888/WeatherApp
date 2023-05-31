@@ -36,10 +36,6 @@ public class FragmentSettings extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         mainActivity = (MainActivity) getActivity();
-
-        Spinner spinnerTime =view.findViewById(R.id.spinnerTime);
-
-        initSpinner(spinnerTime);
     }
 
     @Override
@@ -51,14 +47,5 @@ public class FragmentSettings extends Fragment {
         imageFav.setBackgroundColor(0x00FFFFFF);
         imageMenu.setBackgroundColor(0x20FFFFFF);
         super.onResume();
-    }
-
-    private void initSpinner(Spinner spinnerTime) {
-        String[] items = new String[]{
-                "5 minutes", "10 minutes", "30 minutes", "1 hour",
-        };
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, items);
-        spinnerTime.setAdapter(adapter);
     }
 }

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="128dp"
+    tools:context=".FragmentOneFavourite">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:background="@drawable/texttile"
+        android:orientation="horizontal"
+        tools:ignore="UselessParent">
+
+        <TextView
+            android:id="@+id/textCityNameOneFav"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:textColor="@color/white"
+            android:textSize="28sp"
+            android:gravity="center"
+            android:text="@string/City" />
+
+        <TextView
+            android:id="@+id/textTemperatureOneFav"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:textColor="@color/additional1"
+            android:textSize="28sp"
+            android:gravity="center"
+            android:text="@string/Value" />
+
+    </LinearLayout>
+
+</FrameLayout>

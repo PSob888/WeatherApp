@@ -16,4 +16,13 @@
     <string name="Value">[Value]</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="City_here">City here</string>
+    <string name="Min5">5 minutes</string>
+    <string name="Min10">10 minutes</string>
+    <string name="Min20">20 minutes</string>
+    <string name="Min30">30 minutes</string>
+    <string name="Tomorrow">Tomorrow</string>
+    <string name="InTwoDays">In 2 days</string>
+    <string name="InThreeDays">In 3 days</string>
+    <string name="InFourDays">In 4 days</string>
+    <string name="InFiveDays">In 5 days</string>
 </resources>
