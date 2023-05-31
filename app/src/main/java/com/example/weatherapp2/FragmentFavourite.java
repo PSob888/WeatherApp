@@ -44,4 +44,8 @@ public class FragmentFavourite extends Fragment {
         imageMenu.setBackgroundColor(0x00FFFFFF);
         super.onResume();
     }
+
+    public void createNewFavs(){
+
+    }
 }
