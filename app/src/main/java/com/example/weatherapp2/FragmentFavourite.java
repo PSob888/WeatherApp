@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentContainerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,9 +14,14 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class FragmentFavourite extends Fragment {
 
     private FragmentActivity mainActivity;
+
+    List<FragmentContainerView> fragmentContainerViews = new ArrayList<>();
 
     public FragmentFavourite() {
         // Required empty public constructor

@@ -8,4 +8,8 @@ public interface Weatherapi {
     @GET("weather")
     Call<WeatherResponse> getWeather(@Query("q") String cityName,
                           @Query("appid") String api_key);
+
+    @GET("forecast")
+    Call<WeatherData> getForecast(@Query("q") String cityName,
+                                     @Query("appid") String api_key);
 }

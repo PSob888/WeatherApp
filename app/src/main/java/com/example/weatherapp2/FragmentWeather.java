@@ -2,6 +2,8 @@ package com.example.weatherapp2;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -42,6 +44,7 @@ import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -67,6 +70,11 @@ public class FragmentWeather extends Fragment {
     TextView textMoist;
     TextView textWind;
     TextView textPressure;
+    TextView textTomorrow;
+    TextView textInTwo;
+    TextView textInThree;
+    TextView textInFour;
+    TextView textInFive;
     EditText editText;
     ImageButton searchButton;
     ImageButton favButton;
@@ -94,6 +102,11 @@ public class FragmentWeather extends Fragment {
         textMoist = view.findViewById(R.id.textMoist2);
         textWind = view.findViewById(R.id.textWind2);
         textPressure = view.findViewById(R.id.textPressure2);
+        textTomorrow = view.findViewById(R.id.textTomorrow2);
+        textInTwo = view.findViewById(R.id.textInTwo2);
+        textInThree = view.findViewById(R.id.textInThree2);
+        textInFour = view.findViewById(R.id.textInFour2);
+        textInFive = view.findViewById(R.id.textInFive2);
         editText = view.findViewById(R.id.editText);
         searchButton = view.findViewById(R.id.imageButtonSerach);
         cloudImage = view.findViewById(R.id.imageTypeOfClouds);
@@ -102,8 +115,10 @@ public class FragmentWeather extends Fragment {
             @Override
             public void onClick(View view) {
                 String cityName = String.valueOf(editText.getText());
-                if(!cityName.equals(""))
+                if(!cityName.equals("")){
                     getWeather(view, cityName);
+                    getForecast(view, cityName);
+                }
             }
         });
 
@@ -113,15 +128,31 @@ public class FragmentWeather extends Fragment {
                 String cityName = (String) textCityName.getText();
                 List<String> fav = mainActivity.getFavourites();
                 if(fav.contains(cityName)){
-                    fav.remove(cityName);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(mainActivity);
+                    builder.setMessage("Do you want to remove this city?");
+                    builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            fav.remove(cityName);
+                            mainActivity.setFavourites(fav);
+                            mainActivity.saveFavourites();
+
+                            setAllTheTexts("current");
+                        }
+                    });
+                    builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
                 }
                 else{
                     fav.add(cityName);
                 }
                 mainActivity.setFavourites(fav);
                 mainActivity.saveFavourites();
-
-
 
                 setAllTheTexts("current");
             }
@@ -161,12 +192,13 @@ public class FragmentWeather extends Fragment {
                 else{
                     WeatherResponse myData = response.body();
 
-                    WeatherPanel test = new WeatherPanel(new WeatherResponse(myData), Calendar.getInstance().getTime());
-
-                    if(test.getWeatherResponse().getCoord() == null){
+                    if(myData.getCoord() == null){
                         Toast.makeText(getActivity() , "No data, probably not a valid city", Toast.LENGTH_LONG).show();
                     }
                     else{
+
+                        WeatherPanel test = new WeatherPanel(new WeatherResponse(myData), Calendar.getInstance().getTime());
+
                         setWeatherPanel(test);
                         writeWeatherDataToFile("current");
                         setAllTheTexts("current");
@@ -176,6 +208,53 @@ public class FragmentWeather extends Fragment {
 
             @Override
             public void onFailure(Call<WeatherResponse> call, Throwable t) {
+                Toast.makeText(getActivity() , t.getMessage(), Toast.LENGTH_LONG).show();
+                Log.d("MyTag", t.getMessage());
+            }
+        });
+
+    }
+
+    public void getForecast(View v, String cityName){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://api.openweathermap.org/data/2.5/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        Weatherapi myApi = retrofit.create(Weatherapi.class);
+
+        Call<WeatherData> testCall = myApi.getForecast(cityName, api_key);
+        testCall.enqueue(new Callback<WeatherData>() {
+            @Override
+            public void onResponse(Call<WeatherData> call, Response<WeatherData> response) {
+                if (response.isSuccessful()) {
+                    WeatherData weatherData = response.body();
+                    List<WeatherItem> dataList = weatherData.getList();
+
+                    List<Double> doubles = new ArrayList<>();
+                    for (WeatherItem weatherItem : dataList) {
+                        doubles.add(weatherItem.getMain().getTemp());
+                    }
+
+                    List<Double> temps = new ArrayList<>();
+                    for(int i=0; i<5; i++){
+                        Double temp = doubles.get((i*8)) + doubles.get((i*8) + 1)
+                                + doubles.get((i*8) + 2) + doubles.get((i*8) + 3)
+                                + doubles.get((i*8) + 4) + doubles.get((i*8) + 5)
+                                + doubles.get((i*8) + 6) + doubles.get((i*8) + 7);
+                        temp = temp / 8.0;
+                        temp = round(temp, 1);
+                        temps.add(i,temp);
+                    }
+                    setWeatherPanelsTemp(temps);
+                    writeWeatherDataToFile("current");
+                    setAllTheTexts("current");
+                } else {
+                    Toast.makeText(getActivity() , "No data, probably not a valid city", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<WeatherData> call, Throwable t) {
                 Toast.makeText(getActivity() , t.getMessage(), Toast.LENGTH_LONG).show();
                 Log.d("MyTag", t.getMessage());
             }
@@ -225,6 +304,13 @@ public class FragmentWeather extends Fragment {
         String image_url="https://openweathermap.org/img/w/" + weatherPanel.getWeatherResponse().getWeatherList().get(0).getIcon() + ".png";
         Picasso.get().load(image_url).into(cloudImage);
 
+        if(weatherPanel.getTemps() != null && weatherPanel.getTemps().get(0) != null){
+            textTomorrow.setText(weatherPanel.getTemps().get(0).toString());
+            textInTwo.setText(weatherPanel.getTemps().get(1).toString());
+            textInThree.setText(weatherPanel.getTemps().get(2).toString());
+            textInFour.setText(weatherPanel.getTemps().get(3).toString());
+            textInFive.setText(weatherPanel.getTemps().get(4).toString());
+        }
     }
 
     private static double round (double value, int precision) {
@@ -232,6 +318,9 @@ public class FragmentWeather extends Fragment {
         return (double) Math.round(value * scale) / scale;
     }
 
+    public void setWeatherPanelsTemp(List<Double> temp) {
+        this.weatherPanel.setTemps(temp);
+    }
     public void setWeatherPanel(WeatherPanel weatherPanel) {
         this.weatherPanel = weatherPanel;
     }
