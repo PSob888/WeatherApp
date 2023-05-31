@@ -58,6 +58,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class FragmentWeather extends Fragment {
 
     private MainActivity mainActivity;
+    Settings settings;
     String url = "https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}";
     String api_key = "72f43f52d4476175f100769b6a0ab5cd";
     WeatherResponse current;
@@ -94,6 +95,7 @@ public class FragmentWeather extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         mainActivity = (MainActivity) getActivity();
+        getNewestSettings();
         textCityName = view.findViewById(R.id.textCityName);
         textHour = view.findViewById(R.id.textHour);
         textLastUpdated = view.findViewById(R.id.textLastUpdated);
@@ -150,6 +152,7 @@ public class FragmentWeather extends Fragment {
                 }
                 else{
                     fav.add(cityName);
+                    writeWeatherDataToFile("cityName");
                 }
                 mainActivity.setFavourites(fav);
                 mainActivity.saveFavourites();
@@ -163,6 +166,7 @@ public class FragmentWeather extends Fragment {
     @Override
     public void onResume(){
         super.onResume();
+        getNewestSettings();
         ImageButton imageSearch = mainActivity.findViewById(R.id.imageButtonSearch);
         ImageButton imageFav = mainActivity.findViewById(R.id.imageButtonFav);
         ImageButton imageMenu = mainActivity.findViewById(R.id.imageButtonMenu);
@@ -294,8 +298,20 @@ public class FragmentWeather extends Fragment {
         textHour.setText(ft2.format(time));
         textLastUpdated.setText(formatter.format(weatherPanel.getUpdateDate()));
 
-        Double temp = round(weatherPanel.getWeatherResponse().getMain().getTemp()-273.15, 1);
-        textTemperature.setText(temp.toString());
+        Double temp;
+        String tempe = "";
+        if(!settings.isUseImperial()){
+            temp = round(weatherPanel.getWeatherResponse().getMain().getTemp()-273.15, 1);
+            tempe += temp.toString();
+            tempe += " *C";
+        }
+        else{
+            temp = round(((weatherPanel.getWeatherResponse().getMain().getTemp()-273.15) * 9/5) + 32, 1);
+            tempe += temp.toString();
+            tempe += " *F";
+        }
+        textTemperature.setText(tempe);
+        tempe = "";
         textClouds.setText(weatherPanel.getWeatherResponse().getWeatherList().get(0).getDescription());
         textMoist.setText(weatherPanel.getWeatherResponse().getMain().getHumidity().toString() + " %");
         textWind.setText(weatherPanel.getWeatherResponse().getWind().getSpeed().toString() + " km/h");
@@ -305,11 +321,80 @@ public class FragmentWeather extends Fragment {
         Picasso.get().load(image_url).into(cloudImage);
 
         if(weatherPanel.getTemps() != null && weatherPanel.getTemps().get(0) != null){
-            textTomorrow.setText(weatherPanel.getTemps().get(0).toString());
-            textInTwo.setText(weatherPanel.getTemps().get(1).toString());
-            textInThree.setText(weatherPanel.getTemps().get(2).toString());
-            textInFour.setText(weatherPanel.getTemps().get(3).toString());
-            textInFive.setText(weatherPanel.getTemps().get(4).toString());
+            if(!settings.isUseImperial()){
+                temp = round(weatherPanel.getTemps().get(0)-273.15, 1);
+                tempe += temp.toString();
+                tempe += " *C";
+            }
+            else{
+                temp = round(((weatherPanel.getTemps().get(0)-273.15) * 9/5) + 32, 1);
+                tempe += temp.toString();
+                tempe += " *F";
+            }
+            textTomorrow.setText(tempe);
+            tempe = "";
+            if(!settings.isUseImperial()){
+                temp = round(weatherPanel.getTemps().get(1)-273.15, 1);
+                tempe += temp.toString();
+                tempe += " *C";
+            }
+            else{
+                temp = round(((weatherPanel.getTemps().get(1)-273.15) * 9/5) + 32, 1);
+                tempe += temp.toString();
+                tempe += " *F";
+            }
+            textInTwo.setText(tempe);
+            tempe = "";
+            if(!settings.isUseImperial()){
+                temp = round(weatherPanel.getTemps().get(2)-273.15, 1);
+                tempe += temp.toString();
+                tempe += " *C";
+            }
+            else{
+                temp = round(((weatherPanel.getTemps().get(2)-273.15) * 9/5) + 32, 1);
+                tempe += temp.toString();
+                tempe += " *F";
+            }
+            textInThree.setText(tempe);
+            tempe = "";
+            if(!settings.isUseImperial()){
+                temp = round(weatherPanel.getTemps().get(3)-273.15, 1);
+                tempe += temp.toString();
+                tempe += " *C";
+            }
+            else{
+                temp = round(((weatherPanel.getTemps().get(3)-273.15) * 9/5) + 32, 1);
+                tempe += temp.toString();
+                tempe += " *F";
+            }
+            textInFour.setText(tempe);
+            tempe = "";
+            if(!settings.isUseImperial()){
+                temp = round(weatherPanel.getTemps().get(4)-273.15, 1);
+                tempe += temp.toString();
+                tempe += " *C";
+            }
+            else{
+                temp = round(((weatherPanel.getTemps().get(4)-273.15) * 9/5) + 32, 1);
+                tempe += temp.toString();
+                tempe += " *F";
+            }
+            textInFive.setText(tempe);
+            tempe = "";
+        }
+    }
+
+    public void getNewestSettings(){
+        SharedPreferences mPrefs = mainActivity.getPreferences(MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = mPrefs.getString("settings", "");
+        Settings settings1 = gson.fromJson(json, Settings.class);
+
+        if(settings1 != null){
+            settings = new Settings(settings1.isUseImperial(), settings1.getRefreshTime());
+        }
+        else{
+            settings = new Settings(false, 5);
         }
     }
 
