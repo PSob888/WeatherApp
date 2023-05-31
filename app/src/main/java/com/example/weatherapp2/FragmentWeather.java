@@ -95,6 +95,7 @@ public class FragmentWeather extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         mainActivity = (MainActivity) getActivity();
+        clearAllFavourites();
         getNewestSettings();
         textCityName = view.findViewById(R.id.textCityName);
         textHour = view.findViewById(R.id.textHour);
@@ -152,7 +153,7 @@ public class FragmentWeather extends Fragment {
                 }
                 else{
                     fav.add(cityName);
-                    writeWeatherDataToFile("cityName");
+                    writeWeatherDataToFile(cityName);
                 }
                 mainActivity.setFavourites(fav);
                 mainActivity.saveFavourites();
@@ -161,6 +162,7 @@ public class FragmentWeather extends Fragment {
             }
         });
         setAllTheTexts("current");
+        getWeatherDataFromFile("current");
     }
 
     @Override
@@ -174,6 +176,7 @@ public class FragmentWeather extends Fragment {
         imageFav.setBackgroundColor(0x00FFFFFF);
         imageMenu.setBackgroundColor(0x00FFFFFF);
         setAllTheTexts("current");
+        getWeatherDataFromFile("current");
     }
 
     public void getWeather(View v, String cityName){
@@ -274,8 +277,16 @@ public class FragmentWeather extends Fragment {
         prefsEditor.commit();
     }
 
+    private void getWeatherDataFromFile(String filename){
+        SharedPreferences mPrefs = mainActivity.getPreferences(MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = mPrefs.getString(filename, "");
+        WeatherPanel weatherPanel = gson.fromJson(json, WeatherPanel.class);
+        this.weatherPanel = weatherPanel;
+    }
+
     private void setAllTheTexts(String filename){
-        SharedPreferences  mPrefs = mainActivity.getPreferences(MODE_PRIVATE);
+        SharedPreferences mPrefs = mainActivity.getPreferences(MODE_PRIVATE);
         Gson gson = new Gson();
         String json = mPrefs.getString(filename, "");
         WeatherPanel weatherPanel = gson.fromJson(json, WeatherPanel.class);
@@ -396,6 +407,13 @@ public class FragmentWeather extends Fragment {
         else{
             settings = new Settings(false, 5);
         }
+    }
+
+    public void clearAllFavourites(){
+        List<String> fav = mainActivity.getFavourites();
+        fav.clear();
+        mainActivity.setFavourites(fav);
+        mainActivity.saveFavourites();
     }
 
     private static double round (double value, int precision) {

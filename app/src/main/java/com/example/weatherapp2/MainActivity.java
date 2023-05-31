@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
     ViewPager2 viewPager;
     List<String> favourites;
+    UpdaterThread updaterThread;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -33,6 +34,38 @@ public class MainActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.viewpager);
         PageAdapter pageAdapter = new PageAdapter(this);
         viewPager.setAdapter(pageAdapter);
+
+        //updaterThread = new UpdaterThread(this);
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        retrieveFavourites();
+        //updaterThread.stopThread();
+        //updaterThread.interrupt();
+        //updaterThread.start();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        //updaterThread.stopThread();
+        //updaterThread.interrupt();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        //updaterThread.stopThread();
+        //updaterThread.interrupt();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        //updaterThread.stopThread();
+        //updaterThread.interrupt();
     }
 
     public void saveFavourites(){

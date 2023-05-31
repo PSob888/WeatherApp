@@ -28,7 +28,7 @@ import com.google.gson.Gson;
 
 public class FragmentSettings extends Fragment {
 
-    private FragmentActivity mainActivity;
+    private MainActivity mainActivity;
     Settings settings;
     Switch switchImperial;
     Switch switchMinutes5;
