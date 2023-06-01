@@ -3,6 +3,7 @@
     <string name="City">CITY</string>
     <string name="Hour">Hour</string>
     <string name="Settings">Settings</string>
+    <string name="Favourites">Favourites</string>
     <string name="Units">Use imperial units</string>
     <string name="Refresh">Automatic refresh time</string>
     <string name="Metric">Metric</string>

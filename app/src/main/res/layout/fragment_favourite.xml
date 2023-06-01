@@ -4,9 +4,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".FragmentFavourite"
-    android:id="@+id/linLayout"
     android:orientation="vertical">
 
+    <TextView
+        android:id="@+id/textSettings"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:gravity="center"
+        android:textSize="32sp"
+        android:textColor="@color/white"
+        android:text="@string/Favourites" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/linLayout">
 
+    </LinearLayout>
 </LinearLayout>

@@ -8,20 +8,26 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
     ViewPager2 viewPager;
     List<String> favourites;
-    UpdaterThread updaterThread;
+    boolean isForeground;
+    Timer timer;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -34,38 +40,60 @@ public class MainActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.viewpager);
         PageAdapter pageAdapter = new PageAdapter(this);
         viewPager.setAdapter(pageAdapter);
-
-        //updaterThread = new UpdaterThread(this);
     }
 
     @Override
     public void onResume(){
         super.onResume();
         retrieveFavourites();
-        //updaterThread.stopThread();
-        //updaterThread.interrupt();
-        //updaterThread.start();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        //updaterThread.stopThread();
-        //updaterThread.interrupt();
     }
 
     @Override
-    public void onStop() {
+    protected void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
         super.onStop();
-        //updaterThread.stopThread();
-        //updaterThread.interrupt();
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        //updaterThread.stopThread();
-        //updaterThread.interrupt();
+//    public void pauseTimer() {
+//        if (timer != null) {
+//            timer.cancel();
+//            timer = null;
+//        }
+//    }
+//
+//    public void recreateTimer() {
+//        if (isForeground && timer == null) {
+//            SharedPreferences mPrefs = this.getPreferences(MODE_PRIVATE);
+//            Gson gson = new Gson();
+//            String json = mPrefs.getString("settings", "");
+//            Settings settings1 = gson.fromJson(json, Settings.class);
+//            long refreshTime = settings1.getRefreshTime();
+//            long period = refreshTime * 1000 * 60;
+//            Timer timer = new Timer();
+//            timer.scheduleAtFixedRate(new TimerTask() {
+//                @Override
+//                public void run() {
+//                    dataRefresh();
+//                }
+//            }, 20, period);
+//        }
+//    }
+
+    public void refreshAllData(){
+        SharedPreferences mPrefs = this.getPreferences(MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = mPrefs.getString("settings", "");
+        WeatherPanel data = gson.fromJson(json, WeatherPanel.class);
+
     }
 
     public void saveFavourites(){

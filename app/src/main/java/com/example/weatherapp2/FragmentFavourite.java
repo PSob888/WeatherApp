@@ -2,6 +2,7 @@ package com.example.weatherapp2;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -13,6 +14,7 @@ import androidx.fragment.app.FragmentContainerView;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +22,7 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 
@@ -43,13 +46,14 @@ public class FragmentFavourite extends Fragment {
         return inflater.inflate(R.layout.fragment_favourite, container, false);
     }
 
+    @SuppressLint("ResourceType")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mainActivity = (MainActivity) getActivity();
 
         getNewestSettings();
-        createNewFavs();
+        //createNewFavs();
     }
 
     @Override
@@ -62,6 +66,7 @@ public class FragmentFavourite extends Fragment {
         imageMenu.setBackgroundColor(0x00FFFFFF);
         super.onResume();
         getNewestSettings();
+        clearFavs();
         createNewFavs();
     }
 
@@ -70,22 +75,49 @@ public class FragmentFavourite extends Fragment {
         LinearLayout linearLayout = getView().findViewById(R.id.linLayout);
 
         for (int i = 0; i < numContainers; i++) {
+            FragmentManager fragmentManager = getParentFragmentManager(); // For Activity, use getFragmentManager()
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
             FrameLayout frameLayout = new FrameLayout(getContext());
-            frameLayout.setLayoutParams(new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.MATCH_PARENT
-            ));
-            frameLayout.setId(i);
+            FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(
+                    FrameLayout.LayoutParams.MATCH_PARENT,
+                    FrameLayout.LayoutParams.WRAP_CONTENT
+            );
+            frameLayout.setLayoutParams(layoutParams);
+            frameLayout.setId(i+500);
+
+            String cityName = mainActivity.getFavourites().get(i);
+            String temp = getTemp(cityName);
+            Log.d("MyTag", cityName);
+            Log.d("MyTag", temp);
+            frameLayout.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    SharedPreferences mPrefs = mainActivity.getPreferences(MODE_PRIVATE);
+                    Gson gson = new Gson();
+                    String json = mPrefs.getString(cityName, "");
+                    WeatherPanel weatherPanel = gson.fromJson(json, WeatherPanel.class);
+                    json = gson.toJson(weatherPanel, WeatherPanel.class);
+                    SharedPreferences.Editor prefsEditor = mPrefs.edit();
+                    prefsEditor.putString("current", json);
+                    prefsEditor.commit();
+                    mainActivity.viewPager.setCurrentItem(0);
+                }
+            });
+            FragmentOneFavourite ff = FragmentOneFavourite.newInstance(cityName, temp);
+
+            fragmentTransaction.replace(i+500, ff);
+            fragmentTransaction.commit();
 
             linearLayout.addView(frameLayout);
-            FragmentOneFavourite myFragment = new FragmentOneFavourite();
-            Bundle args = new Bundle();
-            args.putString("ARG_PARAM1", mainActivity.getFavourites().get(i));
-            FragmentManager fragmentManager = getParentFragmentManager(); // For support library
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.add(frameLayout.getId(), myFragment);
-            fragmentTransaction.commit();
         }
+    }
+
+    public void clearFavs(){
+        LinearLayout linearLayout = getView().findViewById(R.id.linLayout);
+        linearLayout.removeAllViewsInLayout();
     }
 
     public void getNewestSettings(){
@@ -100,5 +132,32 @@ public class FragmentFavourite extends Fragment {
         else{
             settings = new Settings(false, 5);
         }
+    }
+
+    public String getTemp(String cityName){
+        SharedPreferences mPrefs = mainActivity.getPreferences(MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = mPrefs.getString(cityName, "");
+        WeatherPanel weatherPanel = gson.fromJson(json, WeatherPanel.class);
+        getNewestSettings();
+
+        Double temp;
+        String tempe = "";
+        if(!settings.isUseImperial()){
+            temp = round(weatherPanel.getWeatherResponse().getMain().getTemp()-273.15, 1);
+            tempe += temp.toString();
+            tempe += " *C";
+        }
+        else{
+            temp = round(((weatherPanel.getWeatherResponse().getMain().getTemp()-273.15) * 9/5) + 32, 1);
+            tempe += temp.toString();
+            tempe += " *F";
+        }
+        return tempe;
+    }
+
+    private static double round (double value, int precision) {
+        int scale = (int) Math.pow(10, precision);
+        return (double) Math.round(value * scale) / scale;
     }
 }

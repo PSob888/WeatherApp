@@ -95,7 +95,7 @@ public class FragmentWeather extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         mainActivity = (MainActivity) getActivity();
-        clearAllFavourites();
+        //clearAllFavourites();
         getNewestSettings();
         textCityName = view.findViewById(R.id.textCityName);
         textHour = view.findViewById(R.id.textHour);
