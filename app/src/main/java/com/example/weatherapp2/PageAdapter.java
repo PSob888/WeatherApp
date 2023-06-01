@@ -17,6 +17,10 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 public class PageAdapter extends FragmentStateAdapter {
 
+    FragmentWeather fragmentWeather;
+    FragmentFavourite fragmentFavourite;
+    FragmentSettings fragmentSettings;
+
     public PageAdapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
     }
@@ -24,6 +28,7 @@ public class PageAdapter extends FragmentStateAdapter {
     @NonNull
     @Override
     public Fragment createFragment(int position) {
+        //if(fragmentFavourite == null || fragmentSettings == null || fragmentWeather == null)
         switch(position){
             case 0:
                 return new FragmentWeather();

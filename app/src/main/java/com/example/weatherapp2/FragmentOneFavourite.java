@@ -79,10 +79,7 @@ public class FragmentOneFavourite extends Fragment {
         View view = inflater.inflate(R.layout.fragment_one_favourite, container, false);
 
         // Access and modify the views inside the fragment
-        textCity = view.findViewById(R.id.textCityNameOneFav);
-        textTemp = view.findViewById(R.id.textTemperatureOneFav);
-        textCity.setText(mParam1);
-        textTemp.setText(mParam2);
+
         // Return the inflated view
         return view;
     }
@@ -92,6 +89,10 @@ public class FragmentOneFavourite extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mainActivity = (MainActivity) getActivity();
+        textCity = view.findViewById(R.id.textCityNameOneFav);
+        textTemp = view.findViewById(R.id.textTemperatureOneFav);
+        textCity.setText(mParam1);
+        textTemp.setText(mParam2);
     }
 
     public void onResume(){
