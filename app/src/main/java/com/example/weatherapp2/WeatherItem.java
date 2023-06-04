@@ -9,7 +9,7 @@ public class WeatherItem {
     private Clouds clouds;
     private Wind wind;
     private int visibility;
-    private int pop;
+    private Double pop;
     private Sys2 sys;
     private String dt_txt;
 
@@ -61,11 +61,11 @@ public class WeatherItem {
         this.visibility = visibility;
     }
 
-    public int getPop() {
+    public Double getPop() {
         return pop;
     }
 
-    public void setPop(int pop) {
+    public void setPop(Double pop) {
         this.pop = pop;
     }
 

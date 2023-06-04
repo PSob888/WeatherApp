@@ -161,8 +161,8 @@ public class FragmentWeather extends Fragment {
                 setAllTheTexts("current");
             }
         });
-        setAllTheTexts("current");
         getWeatherDataFromFile("current");
+        setAllTheTexts("current");
     }
 
     @Override
@@ -175,8 +175,8 @@ public class FragmentWeather extends Fragment {
         imageSearch.setBackgroundColor(0x20FFFFFF);
         imageFav.setBackgroundColor(0x00FFFFFF);
         imageMenu.setBackgroundColor(0x00FFFFFF);
-        setAllTheTexts("current");
         getWeatherDataFromFile("current");
+        setAllTheTexts("current");
     }
 
     public void getWeather(View v, String cityName){
@@ -194,7 +194,7 @@ public class FragmentWeather extends Fragment {
                     Toast.makeText(getActivity() , "Please enter a valid city", Toast.LENGTH_LONG).show();
                 }
                 else if(!(response.isSuccessful())){
-                    Toast.makeText(getActivity() , response.code(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity() , "No internet connection", Toast.LENGTH_LONG).show();
                 }
                 else{
                     WeatherResponse myData = response.body();
@@ -215,7 +215,7 @@ public class FragmentWeather extends Fragment {
 
             @Override
             public void onFailure(Call<WeatherResponse> call, Throwable t) {
-                Toast.makeText(getActivity() , t.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity() , "No internet connection", Toast.LENGTH_LONG).show();
                 Log.d("MyTag", t.getMessage());
             }
         });
@@ -256,13 +256,13 @@ public class FragmentWeather extends Fragment {
                     writeWeatherDataToFile("current");
                     setAllTheTexts("current");
                 } else {
-                    Toast.makeText(getActivity() , "No data, probably not a valid city", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getActivity() , "No data, probably not a valid city", Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<WeatherData> call, Throwable t) {
-                Toast.makeText(getActivity() , t.getMessage(), Toast.LENGTH_LONG).show();
+                //Toast.makeText(getActivity() , t.getMessage(), Toast.LENGTH_LONG).show();
                 Log.d("MyTag", t.getMessage());
             }
         });

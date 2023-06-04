@@ -79,40 +79,42 @@ public class FragmentFavourite extends Fragment {
             FragmentManager fragmentManager = getChildFragmentManager(); // For Activity, use getFragmentManager()
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-//            FrameLayout frameLayout = new FrameLayout(getContext());
-//            FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(
-//                    FrameLayout.LayoutParams.MATCH_PARENT,
-//                    FrameLayout.LayoutParams.WRAP_CONTENT
-//            );
-//            frameLayout.setLayoutParams(layoutParams);
-//            frameLayout.setId(i+500);
-//
+            FrameLayout frameLayout = new FrameLayout(getContext());
+            FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(
+                    FrameLayout.LayoutParams.MATCH_PARENT,
+                    FrameLayout.LayoutParams.WRAP_CONTENT
+            );
+            frameLayout.setLayoutParams(layoutParams);
+            frameLayout.setId(i+500);
+
             String cityName = mainActivity.getFavourites().get(i);
             String temp = getTemp(cityName);
 //            Log.d("MyTag", cityName);
 //            Log.d("MyTag", temp);
-//            frameLayout.setOnClickListener(new View.OnClickListener()
-//            {
-//                @Override
-//                public void onClick(View v)
-//                {
-//                    SharedPreferences mPrefs = mainActivity.getPreferences(MODE_PRIVATE);
-//                    Gson gson = new Gson();
-//                    String json = mPrefs.getString(cityName, "");
-//                    WeatherPanel weatherPanel = gson.fromJson(json, WeatherPanel.class);
-//                    json = gson.toJson(weatherPanel, WeatherPanel.class);
-//                    SharedPreferences.Editor prefsEditor = mPrefs.edit();
-//                    prefsEditor.putString("current", json);
-//                    prefsEditor.commit();
-//                    mainActivity.viewPager.setCurrentItem(0);
-//                }
-//            });
+            frameLayout.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    SharedPreferences mPrefs = mainActivity.getPreferences(MODE_PRIVATE);
+                    Gson gson = new Gson();
+                    String json = mPrefs.getString(cityName, "");
+                    WeatherPanel weatherPanel = gson.fromJson(json, WeatherPanel.class);
+                    json = gson.toJson(weatherPanel, WeatherPanel.class);
+                    SharedPreferences.Editor prefsEditor = mPrefs.edit();
+                    prefsEditor.putString("current", json);
+                    prefsEditor.commit();
+                    mainActivity.viewPager.setCurrentItem(0);
+                }
+            });
             FragmentOneFavourite ff = FragmentOneFavourite.newInstance(cityName, temp);
 
-            fragmentTransaction.add(R.id.linLayout, ff);
+
+
+            fragmentTransaction.add(i+500, ff);
             fragmentTransaction.commit();
 
-            //linearLayout.addView(frameLayout);
+            linearLayout.addView(frameLayout);
         }
     }
 

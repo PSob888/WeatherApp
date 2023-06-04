@@ -4,9 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.text.TextUtils;
@@ -57,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onResume(){
         super.onResume();
-        retrieveFavourites();
+        internetConnectionCheck();
     }
 
     @Override
@@ -81,6 +84,18 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void internetConnectionCheck(){
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+
+        boolean isConnected = activeNetworkInfo != null && activeNetworkInfo.isConnected();
+
+        if (!isConnected) {
+            Toast.makeText(this , "No internet connection", Toast.LENGTH_LONG).show();
+        }
+    }
+
     public void recreateTimer() {
         if (isForeground && timer == null) {
             SharedPreferences mPrefs = this.getPreferences(MODE_PRIVATE);
@@ -89,13 +104,16 @@ public class MainActivity extends AppCompatActivity {
             Settings settings1 = gson.fromJson(json, Settings.class);
             long refreshTime = settings1.getRefreshTime();
             long period = refreshTime * 1000 * 60;
+            //long period = 1 * 1000 * 60;
             Timer timer = new Timer();
             timer.scheduleAtFixedRate(new TimerTask() {
                 @Override
                 public void run() {
                     refreshAllData();
+                    Log.d("MyTag", "test");
                 }
             }, 0, period);
+            Log.d("MyTag", "timer start");
         }
     }
 
@@ -117,13 +135,8 @@ public class MainActivity extends AppCompatActivity {
 
         //refresh current
         if(diff.getTime() >= modifier){
-            Log.d("MyTag", "Przed weather " + String.valueOf(current.getWeatherResponse().getDt()));
-            getWeather("current", current, this);
-            gson = new Gson();
-            json = mPrefs.getString("current", "");
-            current = gson.fromJson(json, WeatherPanel.class);
-            Log.d("MyTag", "Po weather " + String.valueOf(current.getWeatherResponse().getDt()));
-            getForecast("current", current, this);
+            Log.d("MyTag", "refreshing");
+            current.refreshData(this, "current");
         }
 
         //refresh favourites
@@ -134,115 +147,14 @@ public class MainActivity extends AppCompatActivity {
             WeatherPanel fav = gson.fromJson(json, WeatherPanel.class);
 
             Date datafav = new Date();
-            Date difffav = new Date(datafav.getTime() - current.getUpdateDate().getTime());
+            Date difffav = new Date(datafav.getTime() - fav.getUpdateDate().getTime());
 
             if(difffav.getTime() >= modifier){
-                getWeather(name, fav, this);
-                gson = new Gson();
-                json = mPrefs.getString(name, "");
-                fav = gson.fromJson(json, WeatherPanel.class);
-                getForecast(name, fav, this);
+                Log.d("MyTag", "refreshing");
+                fav.refreshData(this, name);
             }
         }
 
-    }
-
-    public void getWeather(String cityName, WeatherPanel wp, MainActivity mainActivity){
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.openweathermap.org/data/2.5/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        Weatherapi myApi = retrofit.create(Weatherapi.class);
-
-        Call<WeatherResponse> testCall = myApi.getWeather(cityName, api_key);
-        testCall.enqueue(new Callback<WeatherResponse>() {
-            @Override
-            public void onResponse(Call<WeatherResponse> call, Response<WeatherResponse> response) {
-                if(response.code() == 404){
-                    //nic
-                }
-                else if(!(response.isSuccessful())){
-                    //nic
-                }
-                else{
-                    WeatherResponse myData = response.body();
-
-                    if(myData.getCoord() == null){
-                        //nic
-                    }
-                    else{
-
-                        WeatherPanel test = new WeatherPanel(myData, Calendar.getInstance().getTime(), wp.getTemps());
-
-                        SharedPreferences mPrefs = mainActivity.getPreferences(MODE_PRIVATE);
-                        Gson gson = new Gson();
-                        String json = gson.toJson(test, WeatherPanel.class);
-                        SharedPreferences.Editor prefsEditor = mPrefs.edit();
-                        prefsEditor.putString(cityName, json);
-                        prefsEditor.commit();
-
-
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<WeatherResponse> call, Throwable t) {
-                //nic
-                Log.d("MyTag", t.getMessage());
-            }
-        });
-    }
-
-    public void getForecast(String cityName, WeatherPanel wp, MainActivity mainActivity){
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.openweathermap.org/data/2.5/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        Weatherapi myApi = retrofit.create(Weatherapi.class);
-
-        Call<WeatherData> testCall = myApi.getForecast(cityName, api_key);
-        testCall.enqueue(new Callback<WeatherData>() {
-            @Override
-            public void onResponse(Call<WeatherData> call, Response<WeatherData> response) {
-                if (response.isSuccessful()) {
-                    WeatherData weatherData = response.body();
-                    List<WeatherItem> dataList = weatherData.getList();
-
-                    List<Double> doubles = new ArrayList<>();
-                    for (WeatherItem weatherItem : dataList) {
-                        doubles.add(weatherItem.getMain().getTemp());
-                    }
-
-                    List<Double> temps = new ArrayList<>();
-                    for(int i=0; i<5; i++){
-                        Double temp = doubles.get((i*8)) + doubles.get((i*8) + 1)
-                                + doubles.get((i*8) + 2) + doubles.get((i*8) + 3)
-                                + doubles.get((i*8) + 4) + doubles.get((i*8) + 5)
-                                + doubles.get((i*8) + 6) + doubles.get((i*8) + 7);
-                        temp = temp / 8.0;
-                        temp = round(temp, 1);
-                        temps.add(i,temp);
-                    }
-                    wp.setTemps(temps);
-
-                    SharedPreferences mPrefs = mainActivity.getPreferences(MODE_PRIVATE);
-                    Gson gson = new Gson();
-                    String json = gson.toJson(wp, WeatherPanel.class);
-                    SharedPreferences.Editor prefsEditor = mPrefs.edit();
-                    prefsEditor.putString(cityName, json);
-                    prefsEditor.commit();
-                } else {
-                    //nic
-                }
-            }
-
-            @Override
-            public void onFailure(Call<WeatherData> call, Throwable t) {
-                //nic
-                Log.d("MyTag", t.getMessage());
-            }
-        });
     }
 
     public void saveFavourites(){
@@ -282,5 +194,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void setFavourites(List<String> favourites) {
         this.favourites = favourites;
+    }
+
+    public ViewPager2 getViewPager() {
+        return viewPager;
     }
 }
