@@ -103,8 +103,8 @@ public class MainActivity extends AppCompatActivity {
             String json = mPrefs.getString("settings", "");
             Settings settings1 = gson.fromJson(json, Settings.class);
             long refreshTime = settings1.getRefreshTime();
-            long period = refreshTime * 1000 * 60;
-            //long period = 1 * 1000 * 60;
+            //long period = refreshTime * 1000 * 60;
+            long period = 1 * 1000 * 60;
             Timer timer = new Timer();
             timer.scheduleAtFixedRate(new TimerTask() {
                 @Override
@@ -198,5 +198,12 @@ public class MainActivity extends AppCompatActivity {
 
     public ViewPager2 getViewPager() {
         return viewPager;
+    }
+
+    public void setViewPagerItem(int position){
+        viewPager = findViewById(R.id.viewpager);
+        PageAdapter pageAdapter = new PageAdapter(this);
+        viewPager.setAdapter(pageAdapter);
+        viewPager.setCurrentItem(position);
     }
 }

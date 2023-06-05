@@ -133,7 +133,10 @@ public class WeatherPanel {
                     prefsEditor.putString(name, json);
                     prefsEditor.commit();
 
-                    mainActivity.getViewPager().setCurrentItem(mainActivity.getViewPager().getCurrentItem());
+                    PageAdapter adapter = (PageAdapter) mainActivity.getViewPager().getAdapter();
+                    int a = mainActivity.getViewPager().getCurrentItem();
+                    Log.d("MyTag11", String.valueOf(a));
+                    mainActivity.setViewPagerItem(a);
 
                     Log.d("MyTag", "Data should be refreshed");
 
