@@ -73,9 +73,13 @@ public class FragmentFavourite extends Fragment {
 
     public void createNewFavs(){
         int numContainers = mainActivity.getFavourites().size();
+
         LinearLayout linearLayout = getView().findViewById(R.id.linLayout);
 
         for (int i = 0; i < numContainers; i++) {
+//            if(mainActivity.getFavourites().get(i) == null){
+//                continue;
+//            }
             FragmentManager fragmentManager = getChildFragmentManager(); // For Activity, use getFragmentManager()
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
@@ -142,6 +146,10 @@ public class FragmentFavourite extends Fragment {
         Gson gson = new Gson();
         String json = mPrefs.getString(cityName, "");
         WeatherPanel weatherPanel = gson.fromJson(json, WeatherPanel.class);
+        if(weatherPanel == null){
+            return "nothing";
+        }
+
         getNewestSettings();
 
         Double temp;

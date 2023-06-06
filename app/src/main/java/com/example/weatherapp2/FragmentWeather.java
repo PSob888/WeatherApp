@@ -282,6 +282,9 @@ public class FragmentWeather extends Fragment {
         Gson gson = new Gson();
         String json = mPrefs.getString(filename, "");
         WeatherPanel weatherPanel = gson.fromJson(json, WeatherPanel.class);
+        if(weatherPanel == null) {
+            return;
+        }
         this.weatherPanel = weatherPanel;
     }
 
@@ -290,6 +293,10 @@ public class FragmentWeather extends Fragment {
         Gson gson = new Gson();
         String json = mPrefs.getString(filename, "");
         WeatherPanel weatherPanel = gson.fromJson(json, WeatherPanel.class);
+
+        if(weatherPanel == null) {
+            return;
+        }
 
         String name = weatherPanel.getWeatherResponse().getName();
         if(mainActivity.getFavourites().contains(name)){

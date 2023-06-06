@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
             Gson gson = new Gson();
             String json = mPrefs.getString("settings", "");
             Settings settings1 = gson.fromJson(json, Settings.class);
-            long refreshTime = settings1.getRefreshTime();
+            //long refreshTime = settings1.getRefreshTime();
             //long period = refreshTime * 1000 * 60;
             long period = 1 * 1000 * 60;
             Timer timer = new Timer();
@@ -123,11 +123,16 @@ public class MainActivity extends AppCompatActivity {
         String json = mPrefs.getString("settings", "");
         Settings settings = gson.fromJson(json, Settings.class);
 
-        long timeToRefresh = settings.getRefreshTime();
+        //long timeToRefresh = settings.getRefreshTime();
+        long timeToRefresh = 1;
 
         gson = new Gson();
         json = mPrefs.getString("current", "");
         WeatherPanel current = gson.fromJson(json, WeatherPanel.class);
+
+        if(current == null){
+            return;
+        }
 
         Date data = new Date();
         Date diff = new Date(data.getTime() - current.getUpdateDate().getTime());
@@ -145,6 +150,8 @@ public class MainActivity extends AppCompatActivity {
             gson = new Gson();
             json = mPrefs.getString(name, "");
             WeatherPanel fav = gson.fromJson(json, WeatherPanel.class);
+            if(fav==null)
+                continue;
 
             Date datafav = new Date();
             Date difffav = new Date(datafav.getTime() - fav.getUpdateDate().getTime());
@@ -166,6 +173,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void retrieveFavourites(){
+        favourites=null;
         SharedPreferences mPrefs = this.getPreferences(MODE_PRIVATE);
         String savedString = mPrefs.getString("favourites", "");
         setFavourites(new ArrayList<>(Arrays.asList(savedString.split(","))));
@@ -174,6 +182,21 @@ public class MainActivity extends AppCompatActivity {
     private static double round (double value, int precision) {
         int scale = (int) Math.pow(10, precision);
         return (double) Math.round(value * scale) / scale;
+    }
+
+    public void settingsChecker(){
+        SharedPreferences mPrefs = this.getPreferences(MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = mPrefs.getString("settings", "");
+        Settings settings = gson.fromJson(json, Settings.class);
+        if(settings == null){
+            Settings sets = new Settings(false, 5);
+            gson = new Gson();
+            json = gson.toJson(sets, Settings.class);
+            SharedPreferences.Editor prefsEditor = mPrefs.edit();
+            prefsEditor.putString("settings", json);
+            prefsEditor.commit();
+        }
     }
 
     public void onClickSearch(View v){
